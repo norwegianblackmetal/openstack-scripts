@@ -1,0 +1,17 @@
+- name: start mysql
+  command: docker run --name mysql-wordpress -p 3306:3306 -e MYSQL_ROOT_PASSWORD="{{ MYSQL_ROOT_PASSWORD }}" -d mysql:5.7.31
+  when: erase is undefined
+
+- name: start wordpress
+  command: docker run --name wordpress -p 80:80 -p 8080:8080 -e WORDPRESS_DB_NAME=wordpress -e WORDPRESS_DB_HOST="{{ WORDPRESS_DB_HOST }}" -e WORDPRESS_DB_USER="{{ WORDPRESS_DB_USER }}" -e WORDPRESS_DB_PASSWORD="{{ WORDPRESS_DB_PASSWORD }}" -d wordpress:latest
+  when: erase is undefined
+  tags: wordpress
+
+- name: stop mysql
+  command: docker rm -f mysql-wordpress
+  when: erase is defined
+
+- name: stop wordpress
+  command: docker rm -f wordpress
+  when: erase is defined
+  tags: wordpress                                  
