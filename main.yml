@@ -1,5 +1,0 @@
-- hosts: all
-  tasks:
-    - name: create db and cms
-      import_role: 
-        name: create
