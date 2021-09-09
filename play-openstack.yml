@@ -1,0 +1,18 @@
+---
+- hosts: control
+  become: yes
+  tasks:
+  - name: install deps
+    dnf:
+      name:
+        - python3-devel 
+        - libffi-devel 
+        - gcc 
+        - openssl-devel 
+        - python3-libselinux  
+      state: present
+
+  - name: install kolla-ansible
+    pip:
+      name: kolla-ansible
+      state: present

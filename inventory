@@ -1,0 +1,5 @@
+[control]
+oscontrol ansible_host=192.168.0.6
+
+[compute]
+oscompute ansible_host=192.168.0.9
