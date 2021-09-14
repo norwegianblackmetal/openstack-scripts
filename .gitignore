@@ -1,1 +1,4 @@
 /roles/create/defaults/main.yml
+kolla*
+multinode
+venv
