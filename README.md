@@ -1,6 +1,7 @@
 OPENSTACK
-=========
+=
 Installation all in one node.
+-
 
 Execute the below commands:
 1. ansible-playbook -i inventory play-openstack.yml
