@@ -16,3 +16,16 @@
     pip:
       name: kolla-ansible
       state: present
+      virtualenv: "{{ playbook_dir}}/venv"
+
+  - name: make dir /etc/kolla
+    file:
+      path: /etc/kolla
+      state: directory
+      owner: "{{ lookup('env','USER') }}"
+      group: "{{ lookup('env','USER') }}"
+
+  - name: cp globals
+    copy:
+      src: globals.yml
+      dest: /etc/kolla
