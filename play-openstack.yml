@@ -14,9 +14,12 @@
 
   - name: install kolla-ansible
     pip:
-      name: kolla-ansible
+      name: "{{ item }}"
       state: present
       virtualenv: "{{ playbook_dir}}/venv"
+    with_items:
+      - 'kolla-ansible'
+      - 'ansible<2.10'
 
   - name: make dir /etc/kolla
     file:
@@ -27,5 +30,7 @@
 
   - name: cp globals
     copy:
-      src: globals.yml
+      src: "{{ item }}"
       dest: /etc/kolla
+    with_items: ["globals.yml", "venv/share/kolla-ansible/etc_examples/kolla/passwords.yml"]
+
