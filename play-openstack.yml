@@ -34,3 +34,19 @@
       dest: /etc/kolla
     with_items: ["globals.yml", "venv/share/kolla-ansible/etc_examples/kolla/passwords.yml"]
 
+  - name: filled passwords.yml
+    command: "{{ playbook_dir}}/venv/bin/kolla-genpwd"
+
+  - name: create device eth1
+    net_interface:
+      name: eth1
+      state: present
+
+  - name: create connection eth1
+    command: nmcli connection add type dummy ifname eth1
+#    nmcli:
+#      conn_name: conn-eth1
+#      ifname: eth1
+#      type: ethernet
+#      state: present
+    tags: eth1
